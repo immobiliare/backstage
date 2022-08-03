@@ -8,8 +8,10 @@
 <p><b>Signature:</b></p>
 <pre><code class="hljs css language-typescript"><span class="hljs-keyword">type</span> TemplateParameterSchema = {
     title: <span class="hljs-built_in">string</span>;
+    description?: <span class="hljs-built_in">string</span>;
     steps: <span class="hljs-built_in">Array</span>&lt;{
         title: <span class="hljs-built_in">string</span>;
+        description?: <span class="hljs-built_in">string</span>;
         schema: JsonObject;
     }&gt;;
 };

@@ -59,12 +59,105 @@
                 };
               }
             });
-        </script></nav></div><div class="container mainContainer docsContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://github.com/backstage/backstage/edit/master/docs/integrations/github/discovery.md" target="_blank" rel="noreferrer noopener">Edit</a><h1 id="__docusaurus" class="postHeaderTitle">GitHub Discovery</h1></header><article><div><span><p>The GitHub integration has a special discovery processor for discovering catalog
+        </script></nav></div><div class="container mainContainer docsContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://github.com/backstage/backstage/edit/master/docs/integrations/github/discovery.md" target="_blank" rel="noreferrer noopener">Edit</a><h1 id="__docusaurus" class="postHeaderTitle">GitHub Discovery</h1></header><article><div><span><h2><a class="anchor" aria-hidden="true" id="github-provider"></a><a href="#github-provider" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>GitHub Provider</h2>
+<p>The GitHub integration has a discovery provider for discovering catalog
+entities within a GitHub organization. The provider will crawl the GitHub
+organization and register entities matching the configured path. This can be
+useful as an alternative to static locations or manually adding things to the
+catalog. This is the prefered method for ingesting entities into the catalog.</p>
+<h2><a class="anchor" aria-hidden="true" id="installation"></a><a href="#installation" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Installation</h2>
+<p>You will have to add the provider in the catalog initialization code of your
+backend. They are not installed by default, therefore you have to add a
+dependency on <code>@backstage/plugin-catalog-backend-module-github</code> to your backend
+package.</p>
+<pre><code class="hljs css language-bash"><span class="hljs-comment"># From your Backstage root directory</span>
+yarn add --cwd packages/backend @backstage/plugin-catalog-backend-module-github
+</code></pre>
+<p>And then add the entity provider to your catalog builder:</p>
+<pre><code class="hljs css language-diff">  // In packages/backend/src/plugins/catalog.ts
+<span class="hljs-addition">+ import { GitHubEntityProvider } from '@backstage/plugin-catalog-backend-module-github';</span>
+
+  export default async function createPlugin(
+    env: PluginEnvironment,
+  ): Promise&lt;Router&gt; {
+    const builder = await CatalogBuilder.create(env);
+<span class="hljs-addition">+   builder.addEntityProvider(</span>
+<span class="hljs-addition">+     GitHubEntityProvider.fromConfig(env.config, {</span>
+<span class="hljs-addition">+       logger: env.logger,</span>
+<span class="hljs-addition">+       schedule: env.scheduler.createScheduledTaskRunner({</span>
+<span class="hljs-addition">+         frequency: { minutes: 30 },</span>
+<span class="hljs-addition">+         timeout: { minutes: 3 },</span>
+<span class="hljs-addition">+       }),</span>
+<span class="hljs-addition">+     }),</span>
+<span class="hljs-addition">+   );</span>
+
+    // [...]
+  }
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="configuration"></a><a href="#configuration" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Configuration</h2>
+<p>To use the discovery provider, you'll need a GitHub integration
+<a href="/docs/integrations/github/locations">set up</a> with either a <a href="/docs/getting-started/configuration#setting-up-a-github-integration">Personal Access Token</a> or <a href="/docs/integrations/github/github-apps">GitHub Apps</a>.</p>
+<p>Then you can add a github config to the catalog providers configuration:</p>
+<pre><code class="hljs css language-yaml"><span class="hljs-attr">catalog:</span>
+  <span class="hljs-attr">providers:</span>
+    <span class="hljs-attr">github:</span>
+      <span class="hljs-comment"># the provider ID can be any camelCase string</span>
+      <span class="hljs-attr">providerId:</span>
+        <span class="hljs-attr">organization:</span> <span class="hljs-string">'backstage'</span> <span class="hljs-comment"># string</span>
+        <span class="hljs-attr">catalogPath:</span> <span class="hljs-string">'/catalog-info.yaml'</span> <span class="hljs-comment"># string</span>
+        <span class="hljs-attr">filters:</span>
+          <span class="hljs-attr">branch:</span> <span class="hljs-string">'main'</span> <span class="hljs-comment"># string</span>
+          <span class="hljs-attr">repository:</span> <span class="hljs-string">'.*'</span> <span class="hljs-comment"># Regex</span>
+      <span class="hljs-attr">customProviderId:</span>
+        <span class="hljs-attr">organization:</span> <span class="hljs-string">'new-org'</span> <span class="hljs-comment"># string</span>
+        <span class="hljs-attr">catalogPath:</span> <span class="hljs-string">'/custom/path/catalog-info.yaml'</span> <span class="hljs-comment"># string</span>
+        <span class="hljs-attr">filters:</span> <span class="hljs-comment"># optional filters</span>
+          <span class="hljs-attr">branch:</span> <span class="hljs-string">'develop'</span> <span class="hljs-comment"># optional string</span>
+          <span class="hljs-attr">repository:</span> <span class="hljs-string">'.*'</span> <span class="hljs-comment"># optional Regex</span>
+</code></pre>
+<p>This provider supports multiple organizations via unique provider IDs.</p>
+<blockquote>
+<p><strong>Note:</strong> It is possible but certainly not recommended to skip the provider ID level.
+If you do so, <code>default</code> will be used as provider ID.</p>
+</blockquote>
+<ul>
+<li><strong><code>catalogPath</code></strong> <em>(optional)</em>:
+Default: <code>/catalog-info.yaml</code>.
+Path where to look for <code>catalog-info.yaml</code> files.
+When started with <code>/</code>, it is an absolute path from the repo root.</li>
+<li><strong>filters</strong> <em>(optional)</em>:
+<ul>
+<li><strong>branch</strong> <em>(optional)</em>:
+String used to filter results based on the branch name.</li>
+<li><strong>repository</strong> <em>(optional)</em>:
+Regular expression used to filter results based on the repository name.</li>
+</ul></li>
+<li><strong>organization</strong>:
+Name of your organization account/workspace.
+If you want to add multiple organizations, you need to add one provider config each.</li>
+</ul>
+<h2><a class="anchor" aria-hidden="true" id="github-api-rate-limits"></a><a href="#github-api-rate-limits" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>GitHub API Rate Limits</h2>
+<p>GitHub <a href="https://docs.github.com/en/rest/overview/resources-in-the-rest-api#rate-limiting">rate limits</a> API requests to 5,000 per hour (or more for Enterprise
+accounts). The snippet below refreshes the Backstage catalog data every 35 minutes, which issues an API request for each discovered location.</p>
+<p>If your requests are too frequent then you may get throttled by
+rate limiting. You can change the refresh frequency of the catalog in your <code>packages/backend/src/plugins/catalog.ts</code> file:</p>
+<pre><code class="hljs css language-typescript">schedule: env.scheduler.createScheduledTaskRunner({
+  frequency: { minutes: <span class="hljs-number">35</span> },
+  timeout: { minutes: <span class="hljs-number">30</span> },
+}),
+</code></pre>
+<p>More information about scheduling can be found on the <a href="https://backstage.io/docs/reference/backend-tasks.taskscheduledefinition">TaskScheduleDefinition</a> page.</p>
+<p>Alternatively, or additionally, you can configure <a href="/docs/integrations/github/github-apps">github-apps</a> authentication
+which carries a much higher rate limit at GitHub.</p>
+<p>This is true for any method of adding GitHub entities to the catalog, but
+especially easy to hit with automatic discovery.</p>
+<h2><a class="anchor" aria-hidden="true" id="github-processor-to-be-deprecated"></a><a href="#github-processor-to-be-deprecated" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>GitHub Processor (To Be Deprecated)</h2>
+<p>The GitHub integration has a special discovery processor for discovering catalog
 entities within a GitHub organization. The processor will crawl the GitHub
 organization and register entities matching the configured path. This can be
 useful as an alternative to static locations or manually adding things to the
 catalog.</p>
-<h2><a class="anchor" aria-hidden="true" id="installation"></a><a href="#installation" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Installation</h2>
+<h2><a class="anchor" aria-hidden="true" id="installation-1"></a><a href="#installation-1" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Installation</h2>
 <p>You will have to add the processors in the catalog initialization code of your
 backend. They are not installed by default, therefore you have to add a
 dependency on <code>@backstage/plugin-catalog-backend-module-github</code> to your backend
@@ -102,7 +195,7 @@ yarn add --cwd packages/backend @backstage/plugin-catalog-backend-module-github
 <span class="hljs-addition">+    }),</span>
 <span class="hljs-addition">+  );</span>
 </code></pre>
-<h2><a class="anchor" aria-hidden="true" id="configuration"></a><a href="#configuration" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Configuration</h2>
+<h2><a class="anchor" aria-hidden="true" id="configuration-1"></a><a href="#configuration-1" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Configuration</h2>
 <p>To use the discovery processor, you'll need a GitHub integration
 <a href="/docs/integrations/github/locations">set up</a> with either a <a href="/docs/getting-started/configuration#setting-up-a-github-integration">Personal Access Token</a> or <a href="/docs/integrations/github/github-apps">GitHub Apps</a>.</p>
 <p>Then you can add a location target to the catalog configuration:</p>
@@ -134,7 +227,7 @@ a similar variation for catalog files stored in the root directory of each
 repository. You could also use a dash (<code>-</code>) for referring to the default
 branch.</li>
 </ul>
-<h2><a class="anchor" aria-hidden="true" id="github-api-rate-limits"></a><a href="#github-api-rate-limits" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>GitHub API Rate Limits</h2>
+<h2><a class="anchor" aria-hidden="true" id="github-api-rate-limits-1"></a><a href="#github-api-rate-limits-1" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>GitHub API Rate Limits</h2>
 <p>GitHub <a href="https://docs.github.com/en/rest/overview/resources-in-the-rest-api#rate-limiting">rate limits</a> API requests to 5,000 per hour (or more for Enterprise
 accounts). The default Backstage catalog backend refreshes data every 100
 seconds, which issues an API request for each discovered location.</p>
@@ -149,7 +242,7 @@ builder.setProcessingIntervalSeconds(<span class="hljs-number">300</span>);
 which carries a much higher rate limit at GitHub.</p>
 <p>This is true for any method of adding GitHub entities to the catalog, but
 especially easy to hit with automatic discovery.</p>
-</span></div></article></div><div class="docLastUpdate"><em>Last updated on 7/26/2022</em></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/integrations/github/locations"><span class="arrow-prev">← </span><span>Locations</span></a><a class="docs-next button" href="/docs/integrations/github/org"><span>Org Data</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#installation">Installation</a></li><li><a href="#configuration">Configuration</a></li><li><a href="#github-api-rate-limits">GitHub API Rate Limits</a></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><div class="footer-title"><a href="/"><h2 class="footerLogo"></h2></a></div><div><h5>Docs</h5><a href="/docs/overview/what-is-backstage">What is Backstage?</a><a href="/docs/getting-started/">Getting started</a><a href="/docs/features/software-catalog/software-catalog-overview">Software Catalog</a><a href="/docs/plugins/create-a-plugin">Create a Plugin</a><a href="/docs/dls/design">Designing for Backstage</a></div><div><h5>Community</h5><a href="https://discord.gg/MUpMjP2">Support chatroom</a><a href="https://github.com/backstage/backstage/blob/master/CONTRIBUTING.md">Contributing</a><a href="https://backstage.spotify.com">Adopting</a><a href="https://github.com/backstage/community">Community Sessions</a><a href="https://mailchi.mp/spotify/backstage-community">Subscribe to our newsletter</a><a href="https://www.cncf.io/projects/">CNCF Incubation</a></div><div><h5>More</h5><a href="https://spotify.github.io/">Open Source @ Spotify</a><a href="https://engineering.atspotify.com/">Spotify Engineering Blog</a><a href="https://developer.spotify.com/">Spotify for Developers</a><a href="https://github.com/backstage/backstage">GitHub</a><a class="github-button" href="https://github.com/backstage/backstage" data-icon="octicon-star" data-count-href="/backstage/backstage/stargazers" data-show-count="true" data-count-aria-label="# stargazers on GitHub" aria-label="Star this project on GitHub">Star</a><div class="social"><a href="https://twitter.com/SpotifyEng" class="twitter-follow-button">Follow @SpotifyEng</a></div></div></section><p style="text-align:center"><a href="https://spotify.github.io">Made with ❤️ at Spotify</a></p><p class="copyright">Copyright © 2022 Backstage Project Authors. All rights reserved. The Linux Foundation has registered trademarks and uses trademarks. For a list of trademarks of The Linux Foundation, please see our Trademark Usage page: https://www.linuxfoundation.org/trademark-usage</p></footer></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>window.twttr=(function(d,s, id){var js,fjs=d.getElementsByTagName(s)[0],t=window.twttr||{};if(d.getElementById(id))return t;js=d.createElement(s);js.id=id;js.src='https://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js, fjs);t._e = [];t.ready = function(f) {t._e.push(f);};return t;}(document, 'script', 'twitter-wjs'));</script><script>
+</span></div></article></div><div class="docLastUpdate"><em>Last updated on 8/3/2022</em></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/integrations/github/locations"><span class="arrow-prev">← </span><span>Locations</span></a><a class="docs-next button" href="/docs/integrations/github/org"><span>Org Data</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#github-provider">GitHub Provider</a></li><li><a href="#installation">Installation</a></li><li><a href="#configuration">Configuration</a></li><li><a href="#github-api-rate-limits">GitHub API Rate Limits</a></li><li><a href="#github-processor-to-be-deprecated">GitHub Processor (To Be Deprecated)</a></li><li><a href="#installation-1">Installation</a></li><li><a href="#configuration-1">Configuration</a></li><li><a href="#github-api-rate-limits-1">GitHub API Rate Limits</a></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><div class="footer-title"><a href="/"><h2 class="footerLogo"></h2></a></div><div><h5>Docs</h5><a href="/docs/overview/what-is-backstage">What is Backstage?</a><a href="/docs/getting-started/">Getting started</a><a href="/docs/features/software-catalog/software-catalog-overview">Software Catalog</a><a href="/docs/plugins/create-a-plugin">Create a Plugin</a><a href="/docs/dls/design">Designing for Backstage</a></div><div><h5>Community</h5><a href="https://discord.gg/MUpMjP2">Support chatroom</a><a href="https://github.com/backstage/backstage/blob/master/CONTRIBUTING.md">Contributing</a><a href="https://backstage.spotify.com">Adopting</a><a href="https://github.com/backstage/community">Community Sessions</a><a href="https://mailchi.mp/spotify/backstage-community">Subscribe to our newsletter</a><a href="https://www.cncf.io/projects/">CNCF Incubation</a></div><div><h5>More</h5><a href="https://spotify.github.io/">Open Source @ Spotify</a><a href="https://engineering.atspotify.com/">Spotify Engineering Blog</a><a href="https://developer.spotify.com/">Spotify for Developers</a><a href="https://github.com/backstage/backstage">GitHub</a><a class="github-button" href="https://github.com/backstage/backstage" data-icon="octicon-star" data-count-href="/backstage/backstage/stargazers" data-show-count="true" data-count-aria-label="# stargazers on GitHub" aria-label="Star this project on GitHub">Star</a><div class="social"><a href="https://twitter.com/SpotifyEng" class="twitter-follow-button">Follow @SpotifyEng</a></div></div></section><p style="text-align:center"><a href="https://spotify.github.io">Made with ❤️ at Spotify</a></p><p class="copyright">Copyright © 2022 Backstage Project Authors. All rights reserved. The Linux Foundation has registered trademarks and uses trademarks. For a list of trademarks of The Linux Foundation, please see our Trademark Usage page: https://www.linuxfoundation.org/trademark-usage</p></footer></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>window.twttr=(function(d,s, id){var js,fjs=d.getElementsByTagName(s)[0],t=window.twttr||{};if(d.getElementById(id))return t;js=d.createElement(s);js.id=id;js.src='https://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js, fjs);t._e = [];t.ready = function(f) {t._e.push(f);};return t;}(document, 'script', 'twitter-wjs'));</script><script>
                 document.addEventListener('keyup', function(e) {
                   if (e.target !== document.body) {
                     return;
