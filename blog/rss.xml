@@ -4,10 +4,50 @@
         <title>Backstage Software Catalog and Developer Platform Blog</title>
         <link>https://backstage.io/blog</link>
         <description>Backstage Software Catalog and Developer Platform Blog</description>
-        <lastBuildDate>Wed, 28 Feb 2024 00:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Wed, 27 Mar 2024 00:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>en</language>
+        <item>
+            <title><![CDATA[Backstage in Paris: Wrapping up BackstageCon and KubeCon + CloudNativeCon Europe 2024]]></title>
+            <link>https://backstage.io/blog/2024/03/27/backstagecon-kubecon-24</link>
+            <guid>https://backstage.io/blog/2024/03/27/backstagecon-kubecon-24</guid>
+            <pubDate>Wed, 27 Mar 2024 00:00:00 GMT</pubDate>
+            <description><![CDATA[tl;dr: And with that the first BackstageCon Europe comes to an end! The City of Light was good to Backstage with many great conversations at both BackstageCon and KubeCon + CloudNativeCon Europe 2024. If you weren't able to join, the CNCF has a great playlist of all the BackstageCon talks ready to go on YouTube. Check out some of the highlights below — then grab your popcorn and settle in!]]></description>
+            <content:encoded><![CDATA[<p><strong>tl;dr</strong>: And with that the first BackstageCon Europe comes to an end! The City of Light was good to Backstage with many great conversations at both BackstageCon and KubeCon + CloudNativeCon Europe 2024. If you weren't able to join, the CNCF has a great playlist of all the <a href="https://www.youtube.com/playlist?list=PLj6h78yzYM2P4KPyeDFexAVm6ZvfAWMU8" target="_blank" rel="noopener noreferrer">BackstageCon talks</a> ready to go on YouTube. Check out some of the highlights below — then grab your popcorn and settle in!</p>
+<p>{/* truncate */}</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="celebrating-four-years-of-backstage">Celebrating Four Years of Backstage<a href="https://backstage.io/blog/2024/03/27/backstagecon-kubecon-24#celebrating-four-years-of-backstage" class="hash-link" aria-label="Direct link to Celebrating Four Years of Backstage" title="Direct link to Celebrating Four Years of Backstage">​</a></h2>
+<iframe src="https://www.youtube.com/embed/NgYrweEbFNE" width="100%" height="440" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
+<p>Wow! Has it already been four years since we open sourced Backstage? What an amazing run it's been so far. We continue to see the rate of pull requests steadily increase, the attendance and number of <a href="https://github.com/backstage/community/tree/main/sigs" target="_blank" rel="noopener noreferrer">special interest groups</a> (SIGs) has grown, and more people are dedicating their time to new <a href="https://github.com/backstage/community/tree/main/project-areas" target="_blank" rel="noopener noreferrer">project areas</a>!</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="day-1-backstagecon-arrives-in-europe">Day 1: BackstageCon arrives in Europe<a href="https://backstage.io/blog/2024/03/27/backstagecon-kubecon-24#day-1-backstagecon-arrives-in-europe" class="hash-link" aria-label="Direct link to Day 1: BackstageCon arrives in Europe" title="Direct link to Day 1: BackstageCon arrives in Europe">​</a></h2>
+<p>This was the third BackstageCon and the first to take place outside North America. As you can see, it started with a bang.</p>
+<p><img decoding="async" loading="lazy" alt="BackstageCon Europe 2024" src="https://backstage.io/assets/images/backstagecon-europe-2024-ebb97d6902698c8c62e5f7e3dfa9ce1b.jpg" width="1999" height="1333" class="img_ev3q">
+Via <a href="https://www.flickr.com/photos/143247548@N03/albums/72177720315561784/" target="_blank" rel="noopener noreferrer">Cloud Native Computing Foundation</a> on Flickr</p>
+<p>With hosts like <a href="https://www.linkedin.com/in/balajisiva" target="_blank" rel="noopener noreferrer">Balaji Sivasubramanian</a> (Head of Product Management, Red Hat) and <a href="https://se.linkedin.com/in/elenagreul" target="_blank" rel="noopener noreferrer">Helen Greul</a> (Head of Engineering for Backstage, Spotify) <a href="https://www.youtube.com/watch?v=PwVUW8is_WY&amp;list=PLj6h78yzYM2P4KPyeDFexAVm6ZvfAWMU8&amp;index=2" target="_blank" rel="noopener noreferrer">kicking things off</a>, how could BackstageCon Europe not be a smashing success!</p>
+<p>More highlights from the day:</p>
+<ul>
+<li><strong>Happy alignment:</strong> Do you know when teams really need to be aligned? When they're working at a bank. <a href="https://www.linkedin.com/in/thomas-gr%C3%B8nb%C3%A6k/" target="_blank" rel="noopener noreferrer">Thomas Grønbæk</a> (Senior Manager, Bankdata) gave an exciting talk about how “<a href="https://www.youtube.com/playlist?list=PLj6h78yzYM2P4KPyeDFexAVm6ZvfAWMU8" target="_blank" rel="noopener noreferrer">Backstage Made 500+ Developers Happy</a>” in the highly regulated banking industry.</li>
+<li><strong>Scaling up:</strong> On the topic of scaling Backstage — a frequent subject on our <a href="https://discord.com/invite/backstage-687207715902193673" target="_blank" rel="noopener noreferrer">Discord</a> — <a href="https://se.linkedin.com/in/vincenzoscamporlino" target="_blank" rel="noopener noreferrer">Vincenzo Scamporlino</a> (Senior Software Engineer, Spotify) gave us <a href="https://www.youtube.com/playlist?list=PLj6h78yzYM2P4KPyeDFexAVm6ZvfAWMU8" target="_blank" rel="noopener noreferrer">his recommendations</a> that will be helpful for many adopters who want to bring their instance to the next level.</li>
+<li><strong>Lightning round:</strong> There were several awesome <a href="https://www.youtube.com/playlist?list=PLj6h78yzYM2P4KPyeDFexAVm6ZvfAWMU8" target="_blank" rel="noopener noreferrer">lightning talks</a> on varying topics — dynamic plugins, accessibility, OpenAPI tooling, and localization — that left you running to your laptop to learn more!</li>
+<li><strong>Bonus:</strong> Next door at Platform Engineering Day, <a href="https://uk.linkedin.com/in/samanthacoffman" target="_blank" rel="noopener noreferrer">Samantha Coffman</a> (Senior Product Manager, Spotify) was representing Backstage in her talk "<a href="https://www.youtube.com/watch?v=Z_KCOcoliLI&amp;list=PLj6h78yzYM2Me-TpMQFvCphDu_xm71ed_&amp;index=12" target="_blank" rel="noopener noreferrer">Boosting Developer Platform Teams with Product Thinking</a>".</li>
+</ul>
+<p>Beyond the talks, it was great to meet so many different members of the community, both those who've been using Backstage since the beginning as well as people who are just learning about internal developer portals and the open source platform. I had so many great conversations, I started to lose my voice — and it was only the first day.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="day-2-onward-to-kubecon--cloudnativecon">Day 2: Onward to KubeCon + CloudNativeCon<a href="https://backstage.io/blog/2024/03/27/backstagecon-kubecon-24#day-2-onward-to-kubecon--cloudnativecon" class="hash-link" aria-label="Direct link to Day 2: Onward to KubeCon + CloudNativeCon" title="Direct link to Day 2: Onward to KubeCon + CloudNativeCon">​</a></h2>
+<p>Backstage also took the spotlight at KubeCon. On Wednesday, project maintainers <a href="https://github.com/Rugvip" target="_blank" rel="noopener noreferrer">Patrik Oldsberg</a> (Senior Engineer, Spotify) and <a href="https://github.com/benjdlambert" target="_blank" rel="noopener noreferrer">Ben Lambert</a> (Senior Engineer, Spotify) gave us a great overview on “<a href="https://www.youtube.com/watch?v=jBf3g79xcf4" target="_blank" rel="noopener noreferrer">The State of Backstage in 2024</a>” to a packed audience. Highlights from their talk include:</p>
+<ul>
+<li><strong>New project areas:</strong> There are now project areas for Community Plugins, Notifications, and the Scaffolder</li>
+<li><strong>BEPs (Backstage enhancement proposals):</strong> This is a new formal proposal process that allows a more iterative approach then trying to use GitHub Issues as RFCs</li>
+<li><strong>Core framework:</strong> They gave updates on the new auth changes to be secure by default, as well as updates on the New Backend System and New Frontend System</li>
+<li><strong>The future:</strong> Dynamic features! This allows you to install new plugins without having to rebuild</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="day-3-community-community-community">Day 3: Community, community, community!<a href="https://backstage.io/blog/2024/03/27/backstagecon-kubecon-24#day-3-community-community-community" class="hash-link" aria-label="Direct link to Day 3: Community, community, community!" title="Direct link to Day 3: Community, community, community!">​</a></h2>
+<p>To top things off, during his <a href="https://www.youtube.com/watch?v=MICHGBAe8gc&amp;list=PLj6h78yzYM2N8nw1YcqqKveySH6_0VnI0&amp;index=161" target="_blank" rel="noopener noreferrer">CNCF Keynote</a> on Thursday morning, <a href="https://www.cncf.io/people/staff/?p=taylor-dolezal" target="_blank" rel="noopener noreferrer">Taylor Dolezal</a> (Head of Ecosystem, The Linux Foundation) shared what should be an unsurprising stat for members of the community: Backstage is the top CNCF project by end user commits!</p>
+<p><img decoding="async" loading="lazy" alt="CNCF Keynote, KubeCon + CloudNativeCon Europe 2024" src="https://backstage.io/assets/images/cncf-keynote-kubecon-2024-6b5b54b50be25b9639a795634436f65f.jpg" width="1500" height="844" class="img_ev3q">
+Top 10 CNCF Projects by Number of End User Commits</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="day-4-au-revoir-see-you-at-the-next-one">Day 4: Au revoir! See you at the next one!<a href="https://backstage.io/blog/2024/03/27/backstagecon-kubecon-24#day-4-au-revoir-see-you-at-the-next-one" class="hash-link" aria-label="Direct link to Day 4: Au revoir! See you at the next one!" title="Direct link to Day 4: Au revoir! See you at the next one!">​</a></h2>
+<p><img decoding="async" loading="lazy" alt="BackstageCon and KubeCon + CloudNativeCon Europe 2024" src="https://backstage.io/assets/images/backstagecon-kubecon-europe-2024-a26abe3fba4de529d84ce6fb4e641cd5.gif" width="800" height="600" class="img_ev3q"></p>
+<p>You can catch up on all the talks from <a href="https://www.youtube.com/playlist?list=PLj6h78yzYM2P4KPyeDFexAVm6ZvfAWMU8" target="_blank" rel="noopener noreferrer">BackstageCon</a> and the rest of the week on the <a href="https://www.youtube.com/@cncf/playlists" target="_blank" rel="noopener noreferrer">CNCF's YouTube channel</a>. See you in Salt Lake City in November at KubeCon + CloudNativeCon North America!</p>]]></content:encoded>
+        </item>
         <item>
             <title><![CDATA[CVE-2024-26150: Keeping Backstage safe and secure]]></title>
             <link>https://backstage.io/blog/2024/02/28/security-notice</link>
@@ -917,36 +957,6 @@ Pulumi will then create a container based deployment in Amazon Lightsail.</p>
 <p>If you want to contribute and to further improve search, you can check out the <a href="https://github.com/backstage/backstage/issues?q=is%3Aissue+search+label%3Asearch+is%3Aopen" target="_blank" rel="noopener noreferrer">open issues labeled with search</a> or reach out to us at the <a href="https://discord.com/channels/687207715902193673/770283289327566848" target="_blank" rel="noopener noreferrer">#search</a> Discord channel.</p>
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="how-to-get-started">How to get started<a href="https://backstage.io/blog/2022/07/19/releasing-backstage-search-1.0#how-to-get-started" class="hash-link" aria-label="Direct link to How to get started" title="Direct link to How to get started">​</a></h2>
 <p>If you haven’t adopted the Backstage Search Platform yet and feel like now is a good time. Head over to the <a href="https://backstage.io/docs/features/search/getting-started" target="_blank" rel="noopener noreferrer">getting started docs</a>.</p>]]></content:encoded>
-        </item>
-        <item>
-            <title><![CDATA[Introducing the TechDocs Addon Framework]]></title>
-            <link>https://backstage.io/blog/2022/05/13/techdocs-addon-framework</link>
-            <guid>https://backstage.io/blog/2022/05/13/techdocs-addon-framework</guid>
-            <pubDate>Fri, 13 May 2022 00:00:00 GMT</pubDate>
-            <description><![CDATA[This blog post is co-authored by Eric Peterson (@iamEAP), Spotify.]]></description>
-            <content:encoded><![CDATA[<p><em>This blog post is co-authored by Eric Peterson (<a href="https://github.com/iamEAP" target="_blank" rel="noopener noreferrer">@iamEAP</a>), Spotify.</em></p>
-<p><img decoding="async" loading="lazy" alt="backstage header" src="https://backstage.io/assets/images/techdocs-addon-header-bd1f1bfe1225c1b1b749839deb82ad7f.gif" width="960" height="540" class="img_ev3q"></p>
-<p><em>TL;DR:</em> Introducing the TechDocs Addon Framework — a way for us all to contribute and share additional features, TechDocs Addons, on top of the base docs-like-code experience.</p>
-<p>{/* truncate */}</p>
-<p><a href="https://backstage.io/docs/features/techdocs/" target="_blank" rel="noopener noreferrer">TechDocs</a> is a centralized platform for publishing, viewing, and discovering technical documentation across an entire organization. It's a solid foundation! But TechDocs doesn't solve higher order documentation needs on its own such as: How do you create and reinforce a culture of documentation? How do you build trust in the quality of technical documentation?</p>
-<p>To address this need, we’re proud to introduce the <a href="https://github.com/backstage/backstage/issues/9636" target="_blank" rel="noopener noreferrer">TechDocs Addon Framework</a> — a way for us all to contribute and share additional features, TechDocs Addons, on top of the base docs-like-code experience. Using TechDocs Addons, you can customize the TechDocs experience to address some of these higher order needs.</p>
-<p>We plan to open source many of the TechDocs Addons that we use at Spotify. The first Addon we open sourced is ReportIssue, which you can start using today. ReportIssue enables you to highlight text on a page and quickly raise a templated issue for that text, in your version control system (currently supports GitHub and GitLab). The following images depict this Addon in practice.</p>
-<p><img decoding="async" loading="lazy" alt="techdocs-addon1" src="https://backstage.io/assets/images/techdocs-addon1-c2d6e00eda588dca1c65d5b6fc40893f.png" width="512" height="192" class="img_ev3q"></p>
-<p><img decoding="async" loading="lazy" alt="techdocs-addon2" src="https://backstage.io/assets/images/techdocs-addon2-d49f246c8e9e5dc286c32a904a1264c9.png" width="512" height="268" class="img_ev3q"></p>
-<p>Other Addons coming soon include a Stack Overflow card to surface relevant questions and answers and an Issue Counter.</p>
-<p><img decoding="async" loading="lazy" alt="techdocs-addon3" src="https://backstage.io/assets/images/techdocs-addon3-8bf8754967732f4d6b8b602afa6acd48.png" width="248" height="321" class="img_ev3q"></p>
-<p>We encourage you to use Addons that we open source and contribute Addons of your own as you solve technical documentation problems arising in your company. We can’t wait to see what you come up with!</p>
-<p>Here are some resources to help you get started with new TechDocs Addons:</p>
-<ul>
-<li><a href="https://backstage.io/docs/features/techdocs/addons#installing-and-using-addons" target="_blank" rel="noopener noreferrer">Installing and using Addons</a>: add an existing TechDocs Addon to your Backstage App</li>
-<li><a href="https://backstage.io/docs/features/techdocs/addons#creating-an-addon" target="_blank" rel="noopener noreferrer">Creating an Addon</a>: contribute a new Addon for others to use</li>
-<li><a href="https://backstage.io/docs/features/techdocs/addons" target="_blank" rel="noopener noreferrer">TechDocs Addon page</a>: read everything you need to know about TechDocs Addons</li>
-</ul>
-<h1>Next steps</h1>
-<p>At present, the TechDocs Addon Framework is focused on frontend experiences only. We know what’s available now is a solid foundation, but based on our experience developing and maintaining Addons over several years, we know there’s more to be done.</p>
-<p>One such pattern is the occasional need for Addons to retrieve or compute data that is not easily accessible. Examples of these at Spotify are Last Updated and Top Contributors. Seemingly simple, these Addons require the ability to run non-trivial git commands to determine when documentation itself was last updated, and by whom.</p>
-<p><img decoding="async" loading="lazy" alt="techdocs-addon5" src="https://backstage.io/assets/images/techdocs-addon5-f2ff977f962f132fdff42f813079bf03.png" width="298" height="74" class="img_ev3q"></p>
-<p>This next step is a bit more tricky and we would like to work with you all to make it happen. Take a look at <a href="https://github.com/backstage/backstage/issues/11110" target="_blank" rel="noopener noreferrer">this issue</a> in the GitHub repo, let us know what you think, and feel free to get involved.</p>]]></content:encoded>
         </item>
     </channel>
 </rss>
